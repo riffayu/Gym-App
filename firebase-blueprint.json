@@ -1,0 +1,222 @@
+{
+  "entities": {
+    "WorkoutExercise": {
+      "title": "WorkoutExercise",
+      "description": "A single exercise belonging to a user's 5-day (Sunday-Thursday) strength & hypertrophy split.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "programName": {
+          "type": "string",
+          "description": "Name of the active program or blueprint (e.g., AI Boditrax Split)."
+        },
+        "day": {
+          "type": "string",
+          "enum": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+          "description": "Training day of the 5-day split."
+        },
+        "name": {
+          "type": "string",
+          "description": "Exercise name (e.g., Incline Dumbbell Press)."
+        },
+        "target": {
+          "type": "string",
+          "description": "Primary target muscle group (e.g., Upper Chest & Front Delts)."
+        },
+        "targetSets": {
+          "type": "string",
+          "description": "Prescribed sets and rep range (e.g., 4 x 8-10)."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Coaching cues and execution instructions."
+        },
+        "youtubeUrl": {
+          "type": "string",
+          "description": "Form tutorial URL."
+        },
+        "sortOrder": {
+          "type": "integer",
+          "description": "Display order within the training day."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp on creation (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp on update (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "programName",
+        "day",
+        "name",
+        "target",
+        "targetSets",
+        "instructions",
+        "youtubeUrl",
+        "sortOrder",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WorkoutSetLog": {
+      "title": "WorkoutSetLog",
+      "description": "A single logged working set for an exercise on a specific session date.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "exerciseId": {
+          "type": "string",
+          "description": "Referenced exercise document ID."
+        },
+        "exerciseName": {
+          "type": "string",
+          "description": "Denormalized exercise name for history queries."
+        },
+        "day": {
+          "type": "string",
+          "enum": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+          "description": "Split day name."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target muscle group."
+        },
+        "sessionDate": {
+          "type": "string",
+          "description": "ISO calendar date YYYY-MM-DD."
+        },
+        "setNumber": {
+          "type": "integer",
+          "description": "1-based set index."
+        },
+        "weightKg": {
+          "type": "number",
+          "description": "Load lifted in kilograms."
+        },
+        "reps": {
+          "type": "integer",
+          "description": "Repetitions completed."
+        },
+        "rpe": {
+          "type": "integer",
+          "description": "Rate of perceived exertion from 1 to 10."
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the set was marked complete."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional set notes."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp on creation (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp on update (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "exerciseId",
+        "exerciseName",
+        "day",
+        "target",
+        "sessionDate",
+        "setNumber",
+        "weightKg",
+        "reps",
+        "rpe",
+        "completed",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "BodyScan": {
+      "title": "BodyScan",
+      "description": "Boditrax body composition scan metrics and coach notes.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "weightKg": {
+          "type": "number",
+          "description": "Total body weight in kg."
+        },
+        "muscleMassKg": {
+          "type": "number",
+          "description": "Skeletal muscle mass in kg."
+        },
+        "bodyFatPercent": {
+          "type": "number",
+          "description": "Body fat percentage."
+        },
+        "observations": {
+          "type": "string",
+          "description": "Weak points and training focus observations."
+        },
+        "aiSummary": {
+          "type": "string",
+          "description": "Optional summary of generated program."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp on creation (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp on update (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": [
+        "userId",
+        "weightKg",
+        "muscleMassKg",
+        "bodyFatPercent",
+        "observations",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/exercises/{exerciseId}": {
+      "schema": {
+        "$ref": "#/entities/WorkoutExercise"
+      },
+      "description": "User-owned 5-day training split exercises."
+    },
+    "/users/{userId}/workoutLogs/{logId}": {
+      "schema": {
+        "$ref": "#/entities/WorkoutSetLog"
+      },
+      "description": "User-owned logged workout sets."
+    },
+    "/users/{userId}/bodyScans/{scanId}": {
+      "schema": {
+        "$ref": "#/entities/BodyScan"
+      },
+      "description": "User-owned Boditrax body composition scans."
+    }
+  }
+}

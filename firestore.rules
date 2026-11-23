@@ -1,0 +1,169 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidDay(day) {
+      return day in ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'];
+    }
+
+    function isValidExercise(data) {
+      return data.userId is string && data.userId == request.auth.uid && data.userId.size() <= 128 &&
+             data.programName is string && data.programName.size() >= 1 && data.programName.size() <= 80 &&
+             data.day is string && isValidDay(data.day) &&
+             data.name is string && data.name.size() >= 1 && data.name.size() <= 100 &&
+             data.target is string && data.target.size() >= 1 && data.target.size() <= 80 &&
+             data.targetSets is string && data.targetSets.size() >= 1 && data.targetSets.size() <= 40 &&
+             data.instructions is string && data.instructions.size() <= 1000 &&
+             data.youtubeUrl is string && data.youtubeUrl.size() <= 500 &&
+             data.sortOrder is int && data.sortOrder >= 0 && data.sortOrder <= 100;
+    }
+
+    function isValidWorkoutLog(data) {
+      return data.userId is string && data.userId == request.auth.uid && data.userId.size() <= 128 &&
+             data.exerciseId is string && data.exerciseId.size() >= 1 && data.exerciseId.size() <= 128 &&
+             data.exerciseName is string && data.exerciseName.size() >= 1 && data.exerciseName.size() <= 100 &&
+             data.day is string && isValidDay(data.day) &&
+             data.target is string && data.target.size() >= 1 && data.target.size() <= 80 &&
+             data.sessionDate is string && data.sessionDate.size() == 10 && data.sessionDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') &&
+             data.setNumber is int && data.setNumber >= 1 && data.setNumber <= 30 &&
+             data.weightKg is number && data.weightKg >= 0 && data.weightKg <= 1000 &&
+             data.reps is int && data.reps >= 1 && data.reps <= 200 &&
+             data.rpe is int && data.rpe >= 1 && data.rpe <= 10 &&
+             data.completed is bool &&
+             (!('notes' in data) || (data.notes is string && data.notes.size() <= 300));
+    }
+
+    function isValidBodyScan(data) {
+      return data.userId is string && data.userId == request.auth.uid && data.userId.size() <= 128 &&
+             data.weightKg is number && data.weightKg > 0 && data.weightKg <= 500 &&
+             data.muscleMassKg is number && data.muscleMassKg > 0 && data.muscleMassKg <= 300 &&
+             data.bodyFatPercent is number && data.bodyFatPercent >= 1 && data.bodyFatPercent <= 80 &&
+             data.observations is string && data.observations.size() <= 500 &&
+             (!('aiSummary' in data) || (data.aiSummary is string && data.aiSummary.size() <= 500));
+    }
+
+    match /users/{userId}/exercises/{exerciseId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(exerciseId);
+
+      allow create: if isOwner(userId) &&
+                       isValidId(exerciseId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'programName', 'day', 'name', 'target',
+                         'targetSets', 'instructions', 'youtubeUrl', 'sortOrder',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'programName', 'day', 'name', 'target',
+                         'targetSets', 'instructions', 'youtubeUrl', 'sortOrder',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().createdAt is timestamp && incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp && incoming().updatedAt <= request.time &&
+                       isValidExercise(incoming());
+
+      allow update: if isOwner(userId) &&
+                       isValidId(exerciseId) &&
+                       isValidExercise(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp && incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'programName', 'day', 'name', 'target',
+                         'targetSets', 'instructions', 'youtubeUrl', 'sortOrder', 'updatedAt'
+                       ]);
+
+      allow delete: if isOwner(userId) && isValidId(exerciseId);
+    }
+
+    match /users/{userId}/workoutLogs/{logId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(logId);
+
+      allow create: if isOwner(userId) &&
+                       isValidId(logId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'exerciseId', 'exerciseName', 'day', 'target',
+                         'sessionDate', 'setNumber', 'weightKg', 'reps', 'rpe',
+                         'completed', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'exerciseId', 'exerciseName', 'day', 'target',
+                         'sessionDate', 'setNumber', 'weightKg', 'reps', 'rpe',
+                         'completed', 'notes', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().createdAt is timestamp && incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp && incoming().updatedAt <= request.time &&
+                       isValidWorkoutLog(incoming());
+
+      allow update: if isOwner(userId) &&
+                       isValidId(logId) &&
+                       isValidWorkoutLog(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp && incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'weightKg', 'reps', 'rpe', 'completed', 'notes', 'updatedAt'
+                       ]);
+
+      allow delete: if isOwner(userId) && isValidId(logId);
+    }
+
+    match /users/{userId}/bodyScans/{scanId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(scanId);
+
+      allow create: if isOwner(userId) &&
+                       isValidId(scanId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'weightKg', 'muscleMassKg', 'bodyFatPercent',
+                         'observations', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'weightKg', 'muscleMassKg', 'bodyFatPercent',
+                         'observations', 'aiSummary', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().createdAt is timestamp && incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp && incoming().updatedAt <= request.time &&
+                       isValidBodyScan(incoming());
+
+      allow update: if isOwner(userId) &&
+                       isValidId(scanId) &&
+                       isValidBodyScan(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp && incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'weightKg', 'muscleMassKg', 'bodyFatPercent',
+                         'observations', 'aiSummary', 'updatedAt'
+                       ]);
+
+      allow delete: if isOwner(userId) && isValidId(scanId);
+    }
+  }
+}

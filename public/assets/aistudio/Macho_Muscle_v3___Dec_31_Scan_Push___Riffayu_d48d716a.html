@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macho Muscle v3 — Dec 31 Scan Push | Riffayu</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#F0A500;--gold-dim:#B07800;--orange:#FF5C00;--bg:#0A0A0A;--surface:#141414;--surface2:#1E1E1E;--border:#2A2A2A;--text:#E8E8E8;--muted:#8a8a8a;--green:#2ECC71;--red:#E74C3C;--blue:#3498DB;--teal:#1abc9c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+.mono{font-family:'Space Mono',monospace}
+.hero{background:linear-gradient(135deg,#0A0A0A 0%,#1a1000 50%,#0A0A0A 100%);border-bottom:1px solid var(--border);padding:44px 32px 36px;position:relative;overflow:hidden}
+.hero::before{content:'V3';position:absolute;right:-10px;top:-40px;font-family:'Bebas Neue';font-size:240px;color:rgba(240,165,0,.05);pointer-events:none;line-height:1}
+.wrap{max-width:980px;margin:0 auto;position:relative}
+.badge{display:inline-block;background:var(--gold);color:#000;font-family:'Space Mono';font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;text-transform:uppercase;margin:0 6px 14px 0}
+.badge.o{background:var(--orange)}.badge.g{background:var(--green)}
+h1{font-family:'Bebas Neue';font-size:clamp(46px,8vw,86px);letter-spacing:2px;line-height:.95}
+h1 span{color:var(--gold)}
+.subtitle{font-family:'Space Mono';font-size:12px;color:var(--muted);letter-spacing:1px;margin-top:12px}
+.countdown{margin-top:18px;font-family:'Space Mono';font-size:12px;color:var(--gold)}
+.stats-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 32px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:18px}
+.stat{text-align:center}
+.sv{font-family:'Bebas Neue';font-size:30px;color:var(--gold);line-height:1}
+.sv small{font-size:14px;color:var(--muted)}
+.sl{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px;font-family:'Space Mono'}
+.sd{font-size:10px;font-family:'Space Mono';margin-top:2px}
+.up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--muted)}
+.tabs{max-width:980px;margin:20px auto 0;padding:0 32px;display:flex;gap:4px;overflow-x:auto}
+.tab{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-family:'Space Mono';font-size:11px;letter-spacing:1px;padding:10px 14px;cursor:pointer;white-space:nowrap}
+.tab:hover{border-color:var(--gold-dim);color:var(--gold)}
+.tab.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}
+.panels{max-width:980px;margin:0 auto;padding:24px 32px 48px}
+.panel{display:none}.panel.active{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+@media(max-width:680px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);padding:16px 20px}
+.card.warn{border-left:3px solid var(--red)}.card.good{border-left:3px solid var(--green)}.card.info{border-left:3px solid var(--gold)}.card.up3{border-left:3px solid var(--orange)}
+.card h4{font-family:'Space Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.card p,.card li{font-size:12.5px;line-height:1.65;color:#b5b5b5}
+.card ul{padding-left:18px}
+.card strong{color:var(--text)}
+.h-warn{color:var(--red)}.h-good{color:var(--green)}.h-info{color:var(--gold)}.h-up{color:var(--orange)}
+.sec{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);margin:26px 0 12px}
+.sec .t{font-family:'Bebas Neue';font-size:22px;letter-spacing:1px;flex:1}
+.sec .b{font-family:'Space Mono';font-size:9px;letter-spacing:2px;color:var(--gold);border:1px solid var(--gold-dim);padding:2px 8px;text-transform:uppercase}
+table{width:100%;border-collapse:collapse}
+thead tr{background:var(--surface2);border-bottom:1px solid var(--border)}
+th{font-family:'Space Mono';font-size:9px;letter-spacing:2px;color:var(--muted);padding:10px 12px;text-align:left;text-transform:uppercase}
+tbody tr{border-bottom:1px solid var(--border)}
+tbody tr:hover{background:var(--surface2)}
+td{padding:11px 12px;vertical-align:middle;font-size:13px}
+.exn{font-size:14px;font-weight:500}
+.sets{font-family:'Bebas Neue';font-size:18px;color:var(--gold);white-space:nowrap}
+.note{font-size:11.5px;color:var(--muted);line-height:1.5}
+.tag{display:inline-block;font-size:9px;font-family:'Space Mono';padding:1px 6px;letter-spacing:1px;margin:3px 4px 0 0;border:1px solid}
+.t-c{color:var(--orange);background:rgba(255,92,0,.12);border-color:rgba(255,92,0,.3)}
+.t-l{color:var(--blue);background:rgba(52,152,219,.12);border-color:rgba(52,152,219,.3)}
+.t-n{color:var(--green);background:rgba(46,204,113,.12);border-color:rgba(46,204,113,.3)}
+.vl{display:inline-flex;align-items:center;gap:5px;background:#1a0e00;color:var(--gold);text-decoration:none;font-size:11px;font-family:'Space Mono';padding:5px 10px;border:1px solid var(--gold-dim);white-space:nowrap}
+.vl:hover{background:var(--gold);color:#000}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.ri{background:var(--surface);border:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.rn{font-family:'Bebas Neue';font-size:22px;color:rgba(240,165,0,.35);width:22px;flex-shrink:0}
+.rname{flex:1;font-size:13px}
+.rd{font-family:'Space Mono';font-size:10px;color:var(--gold);flex-shrink:0}
+.dayhead{display:flex;gap:20px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.dnum{font-family:'Bebas Neue';font-size:72px;line-height:1;color:rgba(240,165,0,.16)}
+.dtitle{font-family:'Bebas Neue';font-size:40px;letter-spacing:1px;line-height:1}
+.dfocus{font-family:'Space Mono';font-size:11px;color:var(--gold);letter-spacing:1px;margin-top:6px}
+.dwhy{font-family:'Space Mono';font-size:11px;color:var(--orange);margin-top:4px;line-height:1.5}
+.notebox{background:#0d0800;border:1px solid #2a1a00;border-left:3px solid var(--orange);padding:13px 18px;margin:14px 0}
+.notebox p{font-size:12px;color:#b5b5b5;line-height:1.6}
+.greenbox{background:#0d1a0d;border:1px solid #1a4a1a;border-left:3px solid var(--green);padding:13px 18px;margin:14px 0}
+.greenbox p{font-size:12px;color:#b5b5b5;line-height:1.6}
+.week{display:flex;gap:8px;overflow-x:auto;margin-bottom:18px}
+.wd{flex:1;min-width:84px;text-align:center;padding:10px 6px;border:1px solid var(--border);background:var(--surface);cursor:pointer}
+.wd.rest{opacity:.5;cursor:default}
+.wd .n{font-family:'Space Mono';font-size:10px;color:var(--gold);letter-spacing:1px}
+.wd .l{font-size:11.5px;margin-top:4px;font-weight:500}
+.tgt td:nth-child(2),.tgt td:nth-child(3){font-family:'Space Mono';font-size:12px}
+.tgt td:nth-child(3){color:var(--green)}
+.meal{background:var(--surface);border:1px solid var(--border);padding:14px 18px;margin-bottom:8px;display:grid;grid-template-columns:120px 1fr 90px;gap:14px;align-items:center}
+@media(max-width:640px){.meal{grid-template-columns:1fr}}
+.meal .w{font-family:'Space Mono';font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.meal .f{font-size:13px;line-height:1.55;color:#ccc}
+.meal .m{font-family:'Space Mono';font-size:10.5px;color:var(--teal);text-align:right}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:var(--surface);border:1px solid var(--border);margin-bottom:6px;cursor:pointer;font-size:13px;line-height:1.5}
+.chk input{margin-top:3px;accent-color:var(--gold)}
+.footer{text-align:center;padding:32px;font-family:'Space Mono';font-size:10px;color:var(--muted);letter-spacing:2px;border-top:1px solid var(--border);margin-top:40px;line-height:1.8}
+@media(max-width:640px){.hero{padding:30px 20px}.stats-bar{padding:16px 20px}.tabs,.panels{padding-left:16px;padding-right:16px}th:nth-child(3),td:nth-child(3){display:none}}
+</style>
+</head>
+<body>
+
+<div class="hero"><div class="wrap">
+  <span class="badge">PureGym Khobar</span><span class="badge o">v3.0 — Nov 2026</span><span class="badge g">Target scan: Thu 31 Dec</span>
+  <h1>MACHO <span>MUSCLE</span><br>V3 · SCAN PUSH</h1>
+  <div class="subtitle">RIFFAYU · 184 CM · UPPER / LOWER / PUSH / PULL / LEGS · SUN–THU · 5.5 WEEKS</div>
+  <div class="countdown" id="countdown"></div>
+</div></div>
+
+<div class="stats-bar"><div class="wrap stats">
+  <div class="stat"><div class="sv">75.5<small>kg</small></div><div class="sl">Weight</div><div class="sd up">▼ 0.7 vs Oct</div></div>
+  <div class="stat"><div class="sv">14.4<small>kg</small></div><div class="sl">Fat Mass · 19.1%</div><div class="sd up">▼ 0.8 vs Oct</div></div>
+  <div class="stat"><div class="sv">57.9<small>kg</small></div><div class="sl">Muscle Mass</div><div class="sd flat">→ 57–58 since 2025</div></div>
+  <div class="stat"><div class="sv">32.0<small>kg</small></div><div class="sl">Trunk Muscle</div><div class="sd up">▲ 0.4 · best ever</div></div>
+  <div class="stat"><div class="sv">8</div><div class="sl">Visceral Fat</div><div class="sd up">▼ from 9</div></div>
+  <div class="stat"><div class="sv">2.7 / 3.0</div><div class="sl">L / R Arm</div><div class="sd down">gap back to 0.3</div></div>
+  <div class="stat"><div class="sv">10.0 / 10.2</div><div class="sl">L / R Leg</div><div class="sd down">▼ from 10.4 / 10.4</div></div>
+  <div class="stat"><div class="sv">810</div><div class="sl">Boditrax</div><div class="sd flat">Met. age 27</div></div>
+</div></div>
+
+<div class="tabs" id="tabs"></div>
+<div class="panels" id="panels"></div>
+
+<div class="footer">MACHO MUSCLE PLAN v3.0 · RIFFAYU · PUREGYM KHOBAR · BASED ON BODITRAX SCAN 19 NOV 2026<br>22 NOV → 31 DEC 2026 · LOG EVERY SET IN LIFTLOG</div>
+
+<script>
+const yt = q => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q + ' proper form');
+const play = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+
+/* ---------- WARM-UPS & STRETCHES (from your v2 routines) ---------- */
+const WARM = {
+  chest:[['Jumping Jacks','60 sec'],['Arm Circles (both directions)','30 sec'],['Cross-Body Shoulder Swings','30 sec'],['Push-Up (light, slow)','10 reps'],['Band Pull-Apart','15 reps'],['High Knees','45 sec']],
+  back:[['Light Jumping Jacks','60 sec'],['Cat-Cow Back Mobilization','10 reps'],['Hip Hinge (bodyweight)','10 reps'],['Scapula Pull-Ups / Dead Hang','30 sec'],['Light Cable Row','15 reps'],['Glute Bridge','15 reps']],
+  shoulder:[['Neck Rolls (slow)','30 sec'],['Shoulder Rolls (fwd & back)','30 sec'],['Giant Arm Circles','30 sec'],['Light Cable Face Pull','15 reps'],['Bretzel Thoracic Stretch','30 sec/side'],['Y-T-W Band Activation','10 each']],
+  legs:[['Leg Swings (front-back)','20/leg'],['Leg Swings (side-to-side)','20/leg'],['Bodyweight Squat (full depth)','15 reps'],['Hip Circles','10/direction'],['Walking Lunges (bodyweight)','10/leg'],['Glute Bridge','20 reps']]
+};
+const STRETCH = {
+  chest:[['Doorway Chest Stretch','40 sec/side'],['Cross-Body Shoulder Stretch','30 sec/side'],['Overhead Tricep Stretch','30 sec/side'],['Lat Stretch (side lean)','40 sec/side'],['Foam Roll Upper Back','60 sec'],['Deep Belly Breathing','4 breaths']],
+  back:[['Lat Stretch (arms overhead, side lean)','40 sec/side'],["Child's Pose (wide knees)",'45 sec'],['Bicep Wall Stretch','30 sec/side'],['Forearm Flexor Stretch','30 sec/side'],['Thread the Needle','30 sec/side'],['Seated Forward Fold','40 sec']],
+  shoulder:[['Sleeper Stretch','40 sec/side'],['Overhead Shoulder Stretch','30 sec/side'],['Chest Opener (hands behind)','45 sec'],['Overhead Tricep Stretch','30 sec/side'],['Supine Spinal Twist','30 sec/side'],['4-7-8 Breathing','4 breaths']],
+  legs:[['Standing Quad Stretch','40 sec/leg'],['Kneeling Hip Flexor Stretch','45 sec/side'],['Seated Hamstring Stretch','40 sec/leg'],['Pigeon Pose (glutes)','40 sec/side'],['Calf Wall Stretch','30 sec/side'],['Deep Belly Breathing','4 breaths']]
+};
+
+/* ---------- DAYS ---------- */
+// [name, sets, note, tags[], progression]
+const DAYS = [
+ {key:'sun',day:'SUNDAY',n:'01',title:'Upper — Strength',focus:'Chest + Back heavy · low reps',
+  why:'Keeps the trunk gain going (31.6 → 32.0). Heavy bench + row are what moved it.',
+  warm:'chest',stretch:'chest',
+  cardio:'15 min incline walk · 10–12% · 5.0–5.5 km/h',
+  ex:[
+   ['Barbell Bench Press','4 × 5–6','2 ramp-up sets first (bar × 10, 60% × 5). Shoulder blades pinned, elbows ~45°.',['c'],'+2.5 kg when all 4 sets hit 6'],
+   ['Chest-Supported T-Bar or Barbell Row','4 × 6–8','Pull to lower ribs. Pause 1 sec. No torso swing.',['c'],'+2.5 kg when all sets hit 8'],
+   ['Incline DB Press (30°)','3 × 8–10','Full stretch at the bottom, 2-sec lowering.',['c'],'+2 kg DBs at 10 reps'],
+   ['Wide-Grip Lat Pulldown','3 × 8–10','Chest up, pull bar to collarbone.',[],'+5 kg at 10 reps'],
+   ['Single-Arm Cable Lateral Raise','3 × 12–15 /arm','LEFT first. Cable behind body for constant tension.',['l'],'Add reps, then weight'],
+   ['Superset: EZ-Bar Curl + Rope Pushdown','2 × 10 + 2 × 12','Back-to-back, 60 sec rest after the pair.',[],'']
+  ]},
+ {key:'mon',day:'MONDAY',n:'02',title:'Lower — Strength',focus:'Squat focus · quads + hamstrings',
+  why:'Legs fell 10.4 → 10.0/10.2 on one leg day a week. Legs are now trained twice a week.',
+  warm:'legs',stretch:'legs',
+  cardio:'No cardio today — save the legs. 8k+ steps through the day.',
+  ex:[
+   ['Barbell Back Squat','4 × 5–6','2–3 ramp-up sets. Brace, below parallel, drive up hard.',['c'],'+2.5 kg when all sets hit 6'],
+   ['Romanian Deadlift (barbell)','3 × 8','Soft knees, hips back, bar slides down thighs. Stop at hamstring stretch.',['c'],'+2.5 kg at 8 clean reps'],
+   ['Leg Press','3 × 10–12','Feet mid-platform, deep range, no knee lockout.',[],'+10 kg at 12 reps'],
+   ['Single-Leg Leg Extension','3 × 12 /leg (+1 left)','LEFT first, then an extra left set. Squeeze 1 sec at top.',['l','n'],'Left leg sets the weight'],
+   ['Lying Leg Curl','3 × 10–12','Hips down. Slow 3-sec lowering.',[],'+1 plate at 12 reps'],
+   ['Standing Calf Raise (heavy)','4 × 10–12','Full stretch at the bottom, 1-sec hold at top.',[],'Add weight weekly'],
+   ['Hanging Leg Raise','3 × 10–12','No swinging. Curl the pelvis up.',[],'']
+  ]},
+ {key:'tue',day:'TUESDAY',n:'03',title:'Push — Hypertrophy',focus:'Shoulders · chest · triceps · moderate reps',
+  why:'Second chest + shoulder hit of the week. Single-arm triceps for left arm.',
+  warm:'shoulder',stretch:'shoulder',
+  cardio:'20 min incline walk · 10–12% · 5.0–5.5 km/h',
+  ex:[
+   ['Seated DB Shoulder Press','4 × 8–10','Lower to ear height, no low-back arch.',['c'],'+2 kg DBs at 10 reps'],
+   ['Machine Chest Press (or Smith Incline)','3 × 10–12','Controlled 2-sec lowering, chase the pump.',['c'],'+5 kg at 12 reps'],
+   ['Low-to-High Cable Fly','3 × 12–15','Upper-chest bias. Hold the squeeze 1 sec.',[],''],
+   ['DB Lateral Raise','4 × 12–15','Last set = drop set (drop 30%, go to failure). Lead with elbows.',[],'Add reps first'],
+   ['Single-Arm Overhead Cable Tricep Ext.','3 × 12 /arm (+1 left)','LEFT first, then an extra left set. Deep stretch behind the head.',['l','n'],'Left arm sets the weight'],
+   ['Dips (weighted when ready)','3 × 8–10','Slight forward lean. Add a belt once 3 × 10 is easy.',['c'],'+2.5 kg on the belt'],
+   ['Cable Crunch','3 × 12–15','Ribs to hips. Round the spine, don\'t hip-hinge.',[],'']
+  ]},
+ {key:'wed',day:'WEDNESDAY',n:'04',title:'Pull + Arms',focus:'Back thickness · LEFT ARM PRIORITY',
+  why:'Left arm slipped 2.8 → 2.7 while the right stayed 3.0. Every unilateral arm move: left first, plus one extra left set.',
+  warm:'back',stretch:'back',
+  cardio:'15 min incline walk · 10–12% · 5.0–5.5 km/h',
+  ex:[
+   ['Conventional Deadlift','3 × 4–5','2–3 ramp-up sets. Brace hard, bar over mid-foot. Form first, weight second.',['c'],'+2.5–5 kg when all sets clean'],
+   ['Pull-Ups (assisted or weighted)','4 × 6–10','Full hang at bottom, chest to bar. Use the assisted machine if needed.',['c'],'+1 rep/set each week'],
+   ['Single-Arm DB Row','3 × 10 /arm (+1 left)','LEFT first. Elbow to hip, full stretch at bottom.',['l','c'],'Left arm sets the weight'],
+   ['Close-Grip Seated Cable Row','3 × 10–12','Pause and squeeze at the chest.',[],'+5 kg at 12 reps'],
+   ['Cable Face Pull','3 × 15','Rope to forehead, elbows high. Shoulder health.',[],''],
+   ['Single-Arm Incline DB Curl','3 × 10 /arm (+1 left)','LEFT first. Bench at 45° for a long-head stretch. 3-sec lowering.',['l','n'],'Left arm sets the weight'],
+   ['DB Hammer Curl','3 × 10–12','Neutral grip. Start each set with the LEFT arm.',['l'],''],
+   ['Ab Wheel Rollout (kneeling)','3 × 10','Brace, roll only as far as you can control.',[],'']
+  ]},
+ {key:'thu',day:'THURSDAY',n:'05',title:'Legs — Hypertrophy',focus:'Unilateral fix · glutes · calves',
+  why:'Second leg day. Bulgarian split squats with left-first + extra left set to close the 10.0 vs 10.2 gap.',
+  warm:'legs',stretch:'legs',
+  cardio:'Optional 10 min easy walk to cool down.',
+  ex:[
+   ['Hack Squat (or Smith Squat)','4 × 8–10','Deep and controlled. Light on the spine after Wednesday\'s deadlift.',['c'],'+5–10 kg at 10 reps'],
+   ['Bulgarian Split Squat (DB)','3 × 8–10 /leg (+1 left)','LEFT first. Front shin roughly vertical, drop straight down.',['l','c'],'Left leg sets the weight'],
+   ['Barbell Hip Thrust','3 × 8–10','Chin tucked, ribs down, pause 1 sec at lockout.',['c'],'+5 kg at 10 reps'],
+   ['Leg Extension','3 × 12–15','Last set: 15 reps + 5 partials.',[],''],
+   ['Seated Leg Curl','3 × 12–15','Lean forward slightly for a deeper hamstring stretch.',[],''],
+   ['Seated Calf Raise','4 × 15','Pause at the bottom stretch.',[],''],
+   ['Pallof Press','3 × 12 /side','Anti-rotation core. Arms long, don\'t let the cable twist you.',['n'],'']
+  ]}
+];
+
+/* ---------- RENDER HELPERS ---------- */
+const tagHtml = t => ({c:'<span class="tag t-c">COMPOUND</span>',l:'<span class="tag t-l">LEFT FIRST</span>',n:'<span class="tag t-n">NEW</span>'})[t];
+const routine = (arr, icon, title, badge) => `
+  <div class="sec"><span>${icon}</span><div class="t">${title}</div><div class="b">${badge}</div></div>
+  <div class="rgrid">${arr.map((r,i)=>`<div class="ri"><div class="rn">${i+1}</div><div class="rname">${r[0]}</div><div class="rd">${r[1]}</div><a class="vl" href="${yt(r[0])}" target="_blank" rel="noopener">▶</a></div>`).join('')}</div>`;
+
+function dayPanel(d){
+  return `
+  <div class="dayhead"><div class="dnum">${d.n}</div><div>
+    <div class="dtitle">${d.title}</div>
+    <div class="dfocus">${d.day} · ${d.focus}</div>
+    <div class="dwhy">↳ ${d.why}</div></div></div>
+  ${routine(WARM[d.warm],'🔥','5-Min Warm-Up','5 MIN + RAMP-UP SETS')}
+  <div class="sec"><span>🏋️</span><div class="t">Main Workout</div><div class="b">REST 2–3 MIN COMPOUNDS · 60–90 SEC OTHERS</div></div>
+  <table><thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Notes</th><th>Video</th></tr></thead><tbody>
+  ${d.ex.map(e=>`<tr><td><div class="exn">${e[0]}</div>${e[3].map(tagHtml).join('')}${e[4]?`<div class="note" style="color:var(--teal);font-family:'Space Mono';font-size:10px;margin-top:3px">📈 ${e[4]}</div>`:''}</td>
+    <td><span class="sets">${e[1]}</span></td><td><span class="note">${e[2]}</span></td>
+    <td><a class="vl" href="${yt(e[0].replace(/\(.*?\)/g,''))}" target="_blank" rel="noopener">${play}Watch</a></td></tr>`).join('')}
+  </tbody></table>
+  <div class="notebox"><p>🚶 <strong style="color:var(--gold)">CARDIO:</strong> ${d.cardio}</p></div>
+  ${routine(STRETCH[d.stretch],'🧘','5-Min Post-Workout Stretch',"5 MIN — DON'T SKIP")}`;
+}
+
+/* ---------- OVERVIEW ---------- */
+const overview = `
+<div class="grid2">
+  <div class="card good"><h4 class="h-good">✅ The long-run picture is excellent</h4>
+   <p>Since June 2024: fat <strong>20.7 → 14.4 kg</strong>, visceral <strong>11 → 8</strong>, metabolic age <strong>42 → 27</strong>, Boditrax <strong>632 → 810</strong>. Last month was a clean recomp: −0.8 kg fat, +0.1 kg muscle, trunk muscle at an all-time high of <strong>32.0 kg</strong>.</p></div>
+  <div class="card info"><h4 class="h-info">📊 Muscle is stuck at 57–58 kg</h4>
+   <p>Muscle has sat between 56.6 and 58.6 kg for over a year. Each body part is only trained once a week on the v2 split. v3 trains <strong>every muscle twice a week</strong>, which is the main fix.</p></div>
+  <div class="card warn"><h4 class="h-warn">⚠️ Legs are shrinking</h4>
+   <p>Legs fell from <strong>10.4 / 10.4 kg (April)</strong> to <strong>10.0 / 10.2 kg</strong>, and the left is now behind. Legs are about 35% of your total muscle, so this is the biggest gain available. v3 has two leg days with left-first unilateral work.</p></div>
+  <div class="card warn"><h4 class="h-warn">⚠️ Left arm slipped back</h4>
+   <p>Left arm went 2.8 → <strong>2.7 kg</strong>, right is 3.0. The gap is back to 0.3. Fix: every single-arm move starts LEFT, and the left gets <strong>one extra set</strong>. The left arm's reps decide the weight for both.</p></div>
+</div>
+
+<div class="sec"><span>🗓</span><div class="t">Your Week</div><div class="b">SUN–THU TRAIN · FRI–SAT RECOVER</div></div>
+<div class="week">
+ ${DAYS.map((d,i)=>`<div class="wd" onclick="go(${i+1})"><div class="n">${d.day.slice(0,3)}</div><div class="l">${d.title.replace(' — ','<br>')}</div></div>`).join('')}
+ <div class="wd rest"><div class="n">FRI</div><div class="l">Active rest<br>10k steps</div></div>
+ <div class="wd rest"><div class="n">SAT</div><div class="l">Full rest<br>8k steps</div></div>
+</div>
+
+<div class="sec"><span>📈</span><div class="t">5.5-Week Roadmap</div><div class="b">22 NOV → 31 DEC</div></div>
+<table><thead><tr><th>Week</th><th>Dates</th><th>Effort</th><th>What changes</th></tr></thead><tbody>
+ <tr><td class="exn">W1 · Base</td><td class="mono" style="font-size:11px">22–26 Nov</td><td class="sets">RIR 2–3</td><td class="note">Learn the new moves, find working weights, log everything in LiftLog.</td></tr>
+ <tr><td class="exn">W2 · Build</td><td class="mono" style="font-size:11px">29 Nov–3 Dec</td><td class="sets">RIR 2</td><td class="note">Beat W1 on every lift by 1 rep or 2.5 kg.</td></tr>
+ <tr><td class="exn">W3 · Push</td><td class="mono" style="font-size:11px">6–10 Dec</td><td class="sets">RIR 1–2</td><td class="note">+1 set on the first two exercises of each day.</td></tr>
+ <tr><td class="exn">W4 · Peak</td><td class="mono" style="font-size:11px">13–17 Dec</td><td class="sets">RIR 0–1</td><td class="note">Hardest week. Last set of each isolation move goes to failure.</td></tr>
+ <tr><td class="exn">W5 · Peak</td><td class="mono" style="font-size:11px">20–24 Dec</td><td class="sets">RIR 1</td><td class="note">Keep W4 volume. Try for top-set PRs.</td></tr>
+ <tr><td class="exn" style="color:var(--green)">W6 · Deload + Scan</td><td class="mono" style="font-size:11px">27–31 Dec</td><td class="sets">RIR 3</td><td class="note">Sun–Tue: same weights, <strong>half the sets</strong>. Wed 30: rest. <strong>Thu 31: scan first thing in the morning, before training.</strong></td></tr>
+</tbody></table>
+<div class="notebox"><p><strong style="color:var(--gold)">RIR</strong> = reps in reserve: how many more reps you could have done. RIR 2 = stop 2 reps before failure. <strong style="color:var(--gold)">Double progression:</strong> stay at a weight until every set hits the top of the rep range, then add weight.</p></div>
+
+<div class="sec"><span>🎯</span><div class="t">Dec 31 Scan Targets</div><div class="b">REALISTIC FOR 5.5 WEEKS</div></div>
+<table class="tgt"><thead><tr><th>Metric</th><th>19 Nov</th><th>31 Dec target</th></tr></thead><tbody>
+ <tr><td>Fat Mass</td><td>14.4 kg</td><td>≤ 13.3 kg (≈ 17.8%)</td></tr>
+ <tr><td>Muscle Mass</td><td>57.9 kg</td><td>58.2–58.5 kg</td></tr>
+ <tr><td>Body Weight</td><td>75.5 kg</td><td>74.8–75.3 kg</td></tr>
+ <tr><td>Visceral Fat</td><td>8</td><td>7</td></tr>
+ <tr><td>Trunk Fat</td><td>8.4 kg</td><td>≤ 7.9 kg</td></tr>
+ <tr><td>Left Arm Muscle</td><td>2.7 kg</td><td>2.8+ kg</td></tr>
+ <tr><td>Left / Right Leg</td><td>10.0 / 10.2 kg</td><td>10.2 / 10.3 kg</td></tr>
+ <tr><td>Boditrax Score</td><td>810</td><td>820+ (new best beats 813)</td></tr>
+ <tr><td>Metabolic Age</td><td>27</td><td>≤ 25</td></tr>
+</tbody></table>
+<div class="greenbox"><p>Honest expectation: natural muscle gain at your training age is about <strong>0.25–0.5 kg a month</strong>. A great result on 31 Dec is a lower fat number with muscle holding or rising a little, not a big muscle jump. Fat dropping 1 kg while muscle rises 0.3 kg would be your best scan ever.</p></div>`;
+
+/* ---------- REST DAYS ---------- */
+const rest = `
+<div class="dayhead"><div class="dnum">06</div><div><div class="dtitle">Friday & Saturday</div><div class="dfocus">RECOVERY · THIS IS WHEN MUSCLE GROWS</div></div></div>
+<div class="grid2">
+ <div class="card info"><h4 class="h-info">Friday — Active rest</h4><ul>
+  <li><strong>10,000 steps</strong>. A 40-min Corniche walk covers most of it.</li>
+  <li>10-min mobility: the leg stretch + back stretch routines.</li>
+  <li>Eat at the rest-day target (see Diet tab). Protein stays the same.</li></ul></div>
+ <div class="card info"><h4 class="h-info">Saturday — Full rest</h4><ul>
+  <li><strong>8,000 steps</strong>, no training.</li>
+  <li>Meal-prep for Sun–Tue: cook chicken, boil eggs, make sundal and a pot of sambar.</li>
+  <li>Get to bed early so you start Sunday's heavy session fresh.</li></ul></div>
+ <div class="card good"><h4 class="h-good">Sleep</h4><p><strong>7–8 hours every night.</strong> Short sleep during a fat-loss phase costs muscle. Keep the same bedtime on weekends.</p></div>
+ <div class="card up3"><h4 class="h-up">Daily steps</h4><p>Aim for <strong>8–10k steps every day</strong>, training days included. Steps burn more fat over 5 weeks than extra HIIT, and they don't hurt recovery.</p></div>
+</div>`;
+
+/* ---------- DIET ---------- */
+const meals = [
+ ['Breakfast','3 whole eggs + 2 whites (omelette with onion, chilli, spinach) + 2 ragi dosa or 2 pesarattu + mint chutney','P 32 · 420 kcal'],
+ ['Pre-workout<br><span style="color:var(--muted)">60–90 min before</span>','50 g oats cooked in 250 ml low-fat milk + 1 banana, or 3 idli + sambar','P 15 · 400 kcal'],
+ ['Post-workout<br><span style="color:var(--muted)">within 1 hr</span>','1 scoop whey in water + 1 banana, or 1 cup chana sundal + 1 glass buttermilk','P 26 · 250 kcal'],
+ ['Lunch','150 g chicken (curry or pepper fry, little oil) + 1 cup red matta rice / brown rice / millet (thinai, varagu) + poriyal + small bowl curd','P 45 · 650 kcal'],
+ ['Snack','200 g Greek yogurt or 250 ml laban + 30 g roasted chana, or 2 boiled eggs + cucumber','P 22 · 250 kcal'],
+ ['Dinner','150 g fish (mackerel / sardine / tilapia, tawa-fried) + 2 wheat chapati + keerai or dal + rasam','P 40 · 550 kcal']
+];
+const diet = `
+<div class="dayhead"><div class="dnum">🍛</div><div><div class="dtitle">Diet — Lean Recomp</div><div class="dfocus">LOW-GI TAMIL · ≤ 10 SAR / MEAL · KHOBAR</div><div class="dwhy">↳ Small deficit to drop fat. High protein to keep and build muscle.</div></div></div>
+<div class="grid2">
+ <div class="card info"><h4 class="h-info">Training days (Sun–Thu)</h4><p><strong style="font-size:20px;color:var(--gold)">~2,300 kcal</strong><br>Protein <strong>160 g</strong> · Carbs <strong>~270 g</strong> · Fat <strong>~65 g</strong></p></div>
+ <div class="card info"><h4 class="h-info">Rest days (Fri–Sat)</h4><p><strong style="font-size:20px;color:var(--gold)">~2,050 kcal</strong><br>Protein <strong>160 g</strong> · Carbs <strong>~195 g</strong> · Fat <strong>~70 g</strong></p></div>
+</div>
+<div class="notebox"><p>How these numbers were set: your scan BMR is 7,167 kJ ≈ <strong>1,713 kcal</strong>. With 5 sessions and 8–10k steps, maintenance is about 2,550–2,650 kcal. A ~300 kcal deficit should take off about 0.25–0.35 kg of fat a week. <strong>Check weekly:</strong> if your Friday morning weight drops more than 0.5 kg a week, add 150 kcal of rice or oats. If it doesn't move in 2 weeks, take 150 kcal off.</p></div>
+
+<div class="sec"><span>🍽</span><div class="t">Sample Training Day</div><div class="b">≈ 2,500 KCAL · 180 G PROTEIN — TRIM RICE TO HIT 2,300</div></div>
+${meals.map(m=>`<div class="meal"><div class="w">${m[0]}</div><div class="f">${m[1]}</div><div class="m">${m[2]}</div></div>`).join('')}
+<p class="note" style="margin-top:6px">Rest days: drop the pre-workout meal and use ½ cup rice at lunch. Swaps that keep protein the same: chicken ↔ fish ↔ 200 g paneer (higher fat) ↔ 2 cups dal + 3 eggs.</p>
+
+<div class="sec"><span>✅</span><div class="t">Rules for the next 5.5 weeks</div><div class="b">DIET</div></div>
+<div class="grid2">
+ <div class="card good"><h4 class="h-good">Do</h4><ul>
+  <li>Get <strong>30–45 g protein at every main meal</strong>. 4–5 protein feeds a day.</li>
+  <li>Eat most of your carbs before and after training.</li>
+  <li>Water: <strong>3–3.5 L a day</strong> (more on cardio days in the Khobar heat). Keep it steady. BIA scans read hydration.</li>
+  <li>Half your plate vegetables at lunch and dinner (poriyal, keerai, salad).</li>
+  <li>Weigh rice cooked for the first week until you can judge a cup by eye.</li></ul></div>
+ <div class="card warn"><h4 class="h-warn">Limit</h4><ul>
+  <li>Parotta, biryani, fried snacks (vada, bajji, samosa): max <strong>1 meal a week</strong>.</li>
+  <li>Sweets, juices, sweetened tea/coffee. Use 0-cal sweetener in tea.</li>
+  <li>Late-night eating. Finish dinner 2–3 hrs before bed.</li>
+  <li>December parties: eat protein first, one plate, skip the dessert table.</li></ul></div>
+</div>
+
+<div class="sec"><span>💊</span><div class="t">Supplements</div><div class="b">OPTIONAL</div></div>
+<div class="grid2">
+ <div class="card info"><h4 class="h-info">Whey protein</h4><p>1–2 scoops a day only to reach 160 g. Food first.</p></div>
+ <div class="card up3"><h4 class="h-up">Creatine monohydrate · 3–5 g/day</h4><p>The best-supported supplement for strength and muscle. Heads-up: it pulls water into muscle, so it will push the scan's <strong>muscle and water numbers up</strong> and weight up by 0.5–1 kg. Some of that rise will be water, not new muscle. If you start, start <strong>now</strong> and keep taking it through the scan so later scans compare fairly. Check with your doctor first if you have any kidney concerns.</p></div>
+</div>`;
+
+/* ---------- SCAN DAY ---------- */
+const scanItems = [
+ 'Scan on Thu 31 Dec in the <strong>morning</strong>, same as your 19 Nov scan, and keep every future scan at the same time of day.',
+ 'Wed 30 Dec is a <strong>full rest day</strong>. Hard training in the 24–48 hrs before inflates water readings and can blur the result.',
+ 'Normal dinner on the 30th. <strong>No extra-salty meal</strong> (biryani, mandi, shawarma) the night before.',
+ 'Drink your normal 3 L on the 30th. On the morning of the scan: <strong>~300 ml water</strong> on waking, nothing else.',
+ 'Scan on an empty stomach (at least 3–4 hrs after eating) and empty your bladder just before.',
+ 'Same light clothing as before, no shoes or socks, feet and hands clean and dry.',
+ 'No sauna, steam room or heavy sweating on the morning of the scan.',
+ 'If you take creatine, <strong>don\'t stop or start it</strong> in the final week.'
+];
+const scan = `
+<div class="dayhead"><div class="dnum">📋</div><div><div class="dtitle">Scan-Day Protocol</div><div class="dfocus">THURSDAY 31 DEC 2026 · MAKE THE NUMBER TRUSTWORTHY</div><div class="dwhy">↳ Boditrax uses bioimpedance. Hydration, food, and training the day before can move the result as much as 5 weeks of work.</div></div></div>
+<div class="notebox"><p>Your scans so far happened at very different times of day (some morning, some afternoon), which adds noise to the trend. This checklist makes the 31 Dec scan comparable to the 19 Nov one.</p></div>
+${scanItems.map((s,i)=>`<label class="chk"><input type="checkbox" data-k="s${i}"><span>${s}</span></label>`).join('')}
+<div class="sec"><span>📝</span><div class="t">Weekly check-in (every Friday morning)</div><div class="b">LOG IN LIFTLOG</div></div>
+<div class="grid2">
+ <div class="card info"><h4 class="h-info">Track</h4><ul><li>Fasted morning weight (after the bathroom)</li><li>Waist at the belly button</li><li>Top set on bench, squat, deadlift, pull-ups</li><li>Left vs right reps on single-arm and single-leg moves</li></ul></div>
+ <div class="card good"><h4 class="h-good">On track if</h4><ul><li>Weight drifts down 0.2–0.4 kg a week</li><li>Waist down ~0.5 cm a week</li><li>Lifts going up or holding</li><li>Left side matching the right on reps</li></ul></div>
+</div>`;
+
+/* ---------- BUILD ---------- */
+const TABS = [['00 · Overview',overview], ...DAYS.map(d=>[`${d.n} · ${d.day.slice(0,3)} ${d.title.split(' — ')[0].replace(' + Arms',' + Arms')}`, dayPanel(d)]), ['Fri–Sat · Rest',rest], ['🍛 Diet',diet], ['📋 Scan Day',scan]];
+document.getElementById('tabs').innerHTML = TABS.map((t,i)=>`<button class="tab${i?'':' active'}" onclick="go(${i})">${t[0]}</button>`).join('');
+document.getElementById('panels').innerHTML = TABS.map((t,i)=>`<div class="panel${i?'':' active'}">${t[1]}</div>`).join('');
+
+function go(i){
+  document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('active',i===j));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+  try{localStorage.setItem('mm3tab',i)}catch(e){}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+try{const t=+localStorage.getItem('mm3tab');if(t>0&&t<TABS.length)go(t)}catch(e){}
+
+/* auto-open today's workout on first load of the day */
+const dow = new Date().getDay(); // 0 Sun
+const cd = document.getElementById('countdown');
+const days = Math.ceil((new Date('2026-12-31T08:00:00+03:00') - new Date())/864e5);
+cd.textContent = days > 0 ? `⏱ ${days} DAYS TO SCAN · TODAY: ${['SUN · UPPER STRENGTH','MON · LOWER STRENGTH','TUE · PUSH','WED · PULL + ARMS','THU · LEGS','FRI · ACTIVE REST','SAT · FULL REST'][dow]}` : '📋 SCAN TIME — CHECK THE SCAN DAY TAB';
+
+/* checklist memory */
+document.querySelectorAll('.chk input').forEach(c=>{
+  try{c.checked = localStorage.getItem('mm3'+c.dataset.k)==='1'}catch(e){}
+  c.addEventListener('change',()=>{try{localStorage.setItem('mm3'+c.dataset.k,c.checked?'1':'0')}catch(e){}});
+});
+</script>
+</body>
+</html>

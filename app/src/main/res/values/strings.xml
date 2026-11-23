@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">LiftLog</string>
+    <string name="tagline_subtitle">Strength &amp; Hypertrophy Tracker</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_out">Sign out</string>
+    <string name="nav_split">Training</string>
+    <string name="nav_playbook">v3 Plan</string>
+    <string name="nav_coach">AI Coach</string>
+    <string name="nav_progress">Progress</string>
+    <string name="action_add_exercise">Add Exercise</string>
+    <string name="action_log_set">Log Set</string>
+    <string name="action_generate_ai">Generate 5-Day AI Program</string>
+    <string name="action_apply_program">Apply Program to Split</string>
+    <string name="action_form_tutorial">Form Tutorial</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+</resources>

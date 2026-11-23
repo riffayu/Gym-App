@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="firestore_database_id" translatable="false">ai-studio-android-liftlog-32ffff67-8494-4973-9c24-1bc3388d6046</string>
+    <string name="recaptcha_site_key" translatable="false">6Ld3DC4uAAAAAEzfk81BQ7YsuHUw15WKF5GHgtZG</string>
+</resources>

@@ -1,0 +1,6 @@
+{
+  "name": "LiftLog",
+  "description": "Strength & hypertrophy workout logger with 5-day split tracking, Boditrax body scan analysis, and AI-generated training programs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
